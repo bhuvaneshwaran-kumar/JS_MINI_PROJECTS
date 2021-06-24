@@ -51,6 +51,8 @@ function getDragAfterElement(container, mousePositionY) {
 
     return items.reduce((closest, child) => {
 
+        //The Element.getBoundingClientRect() method returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
+
         const { top, height } = child.getBoundingClientRect()
         const offSet = mousePositionY - top - height / 2
 

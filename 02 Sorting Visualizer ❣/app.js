@@ -1,6 +1,20 @@
-// Selecting HTML DOM Elements.
-const sortingOuter = document.querySelector('.sortingOuter')
-const numberElements = [...sortingOuter.querySelectorAll('#numberElements')]
+//Creating sortingOuter Element
+const sortingOuter = document.createElement('div')
+sortingOuter.classList.add('sortingOuter')
+
+//Creating array of number Elements
+const numberElements = []
+for (let i = 0; i < 38; i++) {
+    let numberElement = document.createElement('div')
+    numberElement.setAttribute('id', 'numberElements')
+    numberElements.push(numberElement)
+}
+
+//pushing the array of number elements into sortingOuter
+numberElements.forEach(numberElement => sortingOuter.appendChild(numberElement))
+
+//Prepanding it to bosy element
+document.body.prepend(sortingOuter)
 
 // function that returns random number in a given Range.
 function randomNumber(min, max) {

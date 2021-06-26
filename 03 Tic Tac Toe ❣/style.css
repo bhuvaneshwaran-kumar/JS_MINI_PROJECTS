@@ -1,0 +1,171 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+}
+
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+.board {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Removing un-necessary border's */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+/* change the cursor to not allowd. if the cell is already filled with values */
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+/* styleing the Cross Shape. */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover:before,
+.board.x .cell:not(.x):not(.circle):hover:after {
+  content: "";
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: black;
+  position: absolute;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover:before {
+  transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover:after {
+  transform: rotate(-45deg);
+}
+
+/* styleing the circle. */
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover:before,
+.board.circle .cell:not(.x):not(.circle):hover:after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover:before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background-color: black;
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover:after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: turquoise;
+}
+
+/* Styleing hovering effects. */
+.board.x .cell:not(.x):not(.circle):hover:before,
+.board.x .cell:not(.x):not(.circle):hover:after,
+.board.circle .cell:not(.x):not(.circle):hover:before {
+  content: "";
+  background-color: lightgray;
+  opacity: 0.6;
+}
+
+/* Styleing winning message. */
+.winning-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+.winning-message button {
+  padding: 5px 10px;
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  outline: none;
+  border: none;
+  font-size: 2rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.winning-message button:focus {
+  background-color: black;
+  color: white;
+  user-select: none;
+}
+.winning-message.show {
+  display: flex;
+}
+
+@media (max-width: 480px) {
+  .board.x .cell:not(.x):not(.circle):hover:before,
+  .board.x .cell:not(.x):not(.circle):hover:after,
+  .board.circle.cell:not(.x):not(.circle):hover:before
+    .board.circle
+    .cell:not(.x):not(.circle):hover:after {
+    visibility: hidden;
+  }
+}

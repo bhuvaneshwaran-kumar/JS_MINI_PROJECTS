@@ -35,7 +35,6 @@ function copyToClipBoard(e) {
     if (password === '') return
     let timer
     navigator.clipboard.writeText(password).then(() => {
-        console.log('copied')
         snackBar.classList.add('snackbar-active')
         timer = setTimeout(() => {
             snackBar.classList.remove('snackbar-active')

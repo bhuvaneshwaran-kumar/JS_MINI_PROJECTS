@@ -10,7 +10,6 @@ const pomodoroStatusElement = document.querySelector('#session-status')
 const audio = document.querySelector('audio');
 
 
-
 const SECONDS = 1000 // in miliseconds
 const MINUTE = SECONDS * 60
 let timer, endTime

@@ -8,7 +8,7 @@ const audio = document.querySelector('audio');
 // audio.play()
 // console.log(audio);
 audio.style.display = 'none'
-audio.play();
+// audio.play();
 
 function notifyMe() {
     console.log("line 8")

@@ -9,15 +9,14 @@ const secondElement = document.querySelector('#SS')
 const pomodoroStatusElement = document.querySelector('#session-status')
 const audio = document.querySelector('audio');
 
-let pomodoroStatus = false
+
 
 const SECONDS = 1000 // in miliseconds
 const MINUTE = SECONDS * 60
-let timer
+let timer, endTime
 let minuteTimerDuration = 25
-let secondTimerDuration = '00'
+let pomodoroStatus = false
 
-secondElement.textContent = secondTimerDuration
 minuteElement.textContent = minuteTimerDuration
 
 // Hide audio element
@@ -60,15 +59,10 @@ function handleFormSubmit(e) {
     setStatusMessage(pomodoroStatus)
     toggleElement(pomodoroStatus)
 
+    minuteElement.textContent = minuteTimerDuration - 1
+
     const endTime = new Date().getTime() + minuteTimerDuration * 60000
 
-    startSession()
-
-
-
-}
-function startSession() {
-    const endTime = new Date().getTime() + minuteTimerDuration * 60000
     timer = setInterval(() => {
         const now = new Date().getTime()
         const distance = endTime - now
@@ -77,6 +71,7 @@ function startSession() {
             clearInterval(timer)
             audio.play()
             pomodoroStatusElement.textContent = 'Session Completed !'
+            sendNotification()
             stopPomodoroTimer()
         } else {
             minuteElement.textContent = Math.floor((distance / MINUTE))
@@ -86,6 +81,7 @@ function startSession() {
     secondElement.textContent = '59'
 
 }
+
 
 //get's Notification permission.
 function getNotificationPermissions() {
@@ -100,12 +96,28 @@ function getNotificationPermissions() {
     }
 }
 
+//Send notification
+function sendNotification() {
+    if (Notification.permission !== 'granted') return getNotificationPermissions()
+
+    const options = {
+        icon: '../Bhuvi-Fav-icon.ico',
+        body: `${minuteTimerDuration} is over !`
+    }
+    let customNotifications = new Notification("Time up", options)
+    customNotifications.onclick = () => {
+        window.focus()
+    }
+    //close the notification in 3000 ms
+    setTimeout(customNotifications.close.bind(customNotifications), 3000)
+}
+
 //Reset the pomodoro Status to the begining
 function stopPomodoroTimer(e) {
     e?.preventDefault()
-    minuteTimerDuration = 25
+    minuteTimerDuration = timerInput.value
     pomodoroStatus = false
-    minuteElement.value = minuteTimerDuration
+    minuteElement.textContent = minuteTimerDuration
     secondElement.textContent = '00'
     setStatusMessage(pomodoroStatus)
     toggleElement(pomodoroStatus)
@@ -117,15 +129,18 @@ function stopPomodoroTimer(e) {
 setButton.addEventListener('click', setMinutes)
 pomodoroForm.addEventListener('submit', handleFormSubmit)
 resetButton.addEventListener('click', stopPomodoroTimer)
+window.addEventListener('beforeunload', (event) => {
+    if (pomodoroStatus) {
+        event.preventDefault();
+        event.returnValue = "You have unfinished changes!";
+    }
+})
 
 
 //function call's
 getNotificationPermissions()
 toggleElement(pomodoroStatus)
 setStatusMessage(pomodoroStatus)
-
-
-
 
 // JS Nuggets: Notifications API
 

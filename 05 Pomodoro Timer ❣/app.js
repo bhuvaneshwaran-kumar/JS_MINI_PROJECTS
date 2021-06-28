@@ -5,7 +5,9 @@ const submitButton = pomodoroForm.submitBtn
 const timerInput = pomodoroForm.timerInput
 const minuteElement = document.querySelector('#MM')
 const secondElement = document.querySelector('#SS')
-const pomodoroStatus = document.querySelector('#session-status')
+const pomodoroStatusElement = document.querySelector('#session-status')
+let pomodoroStatus = false
+
 
 let minuteTimerDuration = 25
 let secondTimerDuration = '00'
@@ -28,6 +30,17 @@ function setMinutes(e) {
 
 
 
+function setStatusMessage(status) {
+
+    if (status) {
+        pomodoroStatusElement.textContent = "Session Started!"
+    } else {
+        pomodoroStatusElement.textContent = "Start Session !"
+        console.log('session is yet to start')
+    }
+}
+
+setStatusMessage(pomodoroStatus)
 
 
 

@@ -1,3 +1,9 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 * {
   margin: 0;
   box-sizing: border-box;
@@ -48,4 +54,25 @@ body {
 }
 .pomodoro-timer-container #colon {
   transform: translateY(-1.9px);
+}
+
+.input-timer,
+.set-btn,
+.reset-btn,
+.submit-btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.set-btn,
+.reset-btn,
+.submit-btn {
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#session-status {
+  color: white;
+  font-weight: 500;
 }

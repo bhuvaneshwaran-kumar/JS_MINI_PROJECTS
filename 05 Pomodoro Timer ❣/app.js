@@ -1,3 +1,39 @@
+const pomodoroForm = document.querySelector('form')
+const resetButton = pomodoroForm.resetBtn
+const setButton = pomodoroForm.setBtn
+const submitButton = pomodoroForm.submitBtn
+const timerInput = pomodoroForm.timerInput
+const minuteElement = document.querySelector('#MM')
+const secondElement = document.querySelector('#SS')
+const pomodoroStatus = document.querySelector('#session-status')
+
+let minuteTimerDuration = 25
+let secondTimerDuration = '00'
+
+secondElement.textContent = secondTimerDuration
+minuteElement.textContent = minuteTimerDuration
+
+// Hide the reset button
+resetButton.style.display = 'initial'
+
+setButton.style.display = 'none'
+submitButton.style.display = 'none'
+timerInput.style.display = 'none'
+// set's the minute textContent from timerInput.
+setButton.addEventListener('click', setMinutes)
+function setMinutes(e) {
+    e.preventDefault()
+    minuteElement.textContent = timerInput.value
+}
+
+
+
+
+
+
+
+
+
 // JS Nuggets: Notifications API
 
 //Notification.requestPermission();

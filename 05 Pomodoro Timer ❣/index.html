@@ -11,14 +11,23 @@
 
     <div class="pomodoro-outer-container">
         <h1>Pomodoro Timer :</h1>
+        <p id="session-status">Start session</p>
         <div class="pomodoro-timer-container">
             <p id="MM">25</p>
             <p id="colon">:</p>
             <p id="SS">00</p>
         </div>
+        <button class="submit-btn" name="submitBtn" type="submit" form="pomodoro-form">Start</button>
+        <div class="form-timer-input">
+            <form id="pomodoro-form">
+                <input type="number" class="input-timer" min="1" max="25" name="timerInput" value="25">
+                <button name="setBtn" class="set-btn">set</button>
+                <button name="resetBtn" class="reset-btn">reset</button>
+            </form>
+        </div>
     </div>
 
-
+<!-- A music that's going to play when pomodoro timer is expired -->
     <audio controls>
         <source src="./mixkit-angry-and-agitated-dog-growling-53.wav">
     </audio>

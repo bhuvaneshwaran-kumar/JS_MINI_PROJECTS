@@ -7,42 +7,47 @@ let currentPage
 const showUserData = document.querySelector('.users-data')
 const loaderDiv = document.querySelector('.loader')
 
-
+let timer //helps to limit the rate of execution of function call
 
 // ----Function. handels the click event hapens in pagination nav bar in bottom.
 function HandleClickPage(e) {
-    const targetElement = e.target
-    if (targetElement.classList.contains('page-number')) {
-        let targetElementNumber = parseInt(targetElement.getAttribute('data-number'))
-        viewPage(targetElementNumber)
-        return
-    }
-    if (targetElement.classList.contains('prev')) {
-        if (currentPage === 1) return;
 
-        const currentElem = [...pageNumberElm].reduce((prev, next) => {
-            if (prev?.classList.contains('active')) return prev;
-            if (next.classList.contains('active')) return next;
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+        const targetElement = e.target
+        if (targetElement.classList.contains('page-number')) {
+            let targetElementNumber = parseInt(targetElement.getAttribute('data-number'))
+            viewPage(targetElementNumber)
+            return
+        }
+        if (targetElement.classList.contains('prev')) {
+            if (currentPage === 1) return;
 
-        })
+            const currentElem = [...pageNumberElm].reduce((prev, next) => {
+                if (prev?.classList.contains('active')) return prev;
+                if (next.classList.contains('active')) return next;
 
-        const currentPageNum = parseInt(currentElem.getAttribute('data-number')) - 1
-        viewPage(currentPageNum)
-        return
-    }
-    if (targetElement.classList.contains('next')) {
-        if (currentPage === 5) return;
+            })
 
-        const currentElem = [...pageNumberElm].reduce((prev, next) => {
-            if (prev?.classList.contains('active')) return prev;
-            if (next.classList.contains('active')) return next;
+            const currentPageNum = parseInt(currentElem.getAttribute('data-number')) - 1
+            viewPage(currentPageNum)
+            return
+        }
+        if (targetElement.classList.contains('next')) {
+            if (currentPage === 5) return;
 
-        })
+            const currentElem = [...pageNumberElm].reduce((prev, next) => {
+                if (prev?.classList.contains('active')) return prev;
+                if (next.classList.contains('active')) return next;
 
-        const currentPageNum = parseInt(currentElem.getAttribute('data-number')) + 1
-        viewPage(currentPageNum)
-        return
-    }
+            })
+
+            const currentPageNum = parseInt(currentElem.getAttribute('data-number')) + 1
+            viewPage(currentPageNum)
+            return
+        }
+    }, 400)
+
 }
 
 function viewPage(pageNumber) {
@@ -112,7 +117,20 @@ function endLoader() {
 
 }
 
+function debouncing(event, HandleClickPage, delay) {
+    let timer;
+    const target = event
+    console.log(target, HandleClickPage, delay)
+    return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            console.log(target)
+            HandleClickPage(event.target)
+        }, delay)
+    }
+}
+
 
 // ----Event Listeners.
-paginationNav.addEventListener('click', HandleClickPage)
+paginationNav.addEventListener('click', HandleClickPage);
 viewPage(1)

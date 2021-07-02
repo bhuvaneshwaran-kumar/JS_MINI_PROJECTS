@@ -46,7 +46,8 @@ body {
 .col-2 img,
 .col-3 img {
   width: 100%;
-  height: auto;
+  min-height: auto;
+  max-height: 300px;
   object-fit: cover;
   margin-bottom: 0.5rem;
 }

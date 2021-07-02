@@ -11,10 +11,7 @@ let initialCount = 1
 
 const interSectionObserver = target => {
     const io = new IntersectionObserver((entries, observer) => {
-        console.log(entries)
         entries.forEach(entry => {
-            console.log('😍');
-
             if (entry.isIntersecting) {
                 initialCount++
                 getPictures()
@@ -37,9 +34,8 @@ const addElementToColumn = (element, arr, lastArr) => {
                 imgElm.src = img.url
                 imgElm.setAttribute('desc', img.desc)
                 element.appendChild(imgElm)
-
                 interSectionObserver(imgElm)
-
+                return
             }
 
             const imgElm = document.createElement('img')

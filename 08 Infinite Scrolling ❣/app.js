@@ -5,6 +5,7 @@ const API_URL = `https://api.unsplash.com/photos/?client_id=${CLIENT_ID}`
 const colOne = document.querySelector('.col-1')
 const colTwo = document.querySelector('.col-2')
 const colThree = document.querySelector('.col-3')
+const loaderDiv = document.querySelector('.loader')
 let initialCount = 1
 
 //aws rdx aws lamda
@@ -66,7 +67,7 @@ function splitArrayIntoChunksOfLen(arr, len) {
 
 //fetch images from unsplash api
 const getPictures = async () => {
-
+    loaderDiv.classList.toggle('active')
     const result = await fetch(API_URL + `&page=${initialCount}&per_page=12&w=100&h=100`)
     const datas = await result.json()
 
@@ -87,23 +88,9 @@ const getPictures = async () => {
     addElementToColumn(colThree, imgArrThree, true)
 
     console.log(imgArrOne, imgArrTwo, imgArrThree)
+    loaderDiv.classList.toggle('active')
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 getPictures()

@@ -44,25 +44,29 @@ const setAttributes = (imgElm, img) => {
     imgElm.setAttribute('data-src', img.srcUrl)
 }
 
+
+
 //add image to dom elements
 const addElementToColumn = (element, arr, lastArr) => {
-    const imgElm = document.createElement('img')
-    interSectionObserverToLasyLoadImg(imgElm)
 
     if (lastArr) {
-        arr.forEach((img, index) => {
-            if (index === arr.length - 1) {
-                interSectionObserverToFetchData(imgElm)
-            }
+        arr.forEach(async (img, index) => {
+            const imgElm = document.createElement('img')
+            if (index === arr.length - 1) interSectionObserverToFetchData(imgElm)
             setAttributes(imgElm, img)
+            interSectionObserverToLasyLoadImg(imgElm)
+            element.appendChild(imgElm)  //add to the DOM
         })
     } else {
         arr.forEach((img) => {
+            const imgElm = document.createElement('img')
             setAttributes(imgElm, img)
+            interSectionObserverToLasyLoadImg(imgElm)
+            element.appendChild(imgElm)  //add to the DOM
+
         })
     }
 
-    element.appendChild(imgElm)  //add to the DOM
 
 }
 

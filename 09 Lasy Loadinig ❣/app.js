@@ -79,25 +79,30 @@ function splitArrayIntoChunksOfLen(arr, len) {
 //fetch images from unsplash api
 const getPictures = async () => {
     loaderDiv.classList.toggle('active')
-    const result = await fetch(API_URL + `&page=${initialCount}&per_page=12`)
-    const datas = await result.json()
+    try {
+        const result = await fetch(API_URL + `&page=${initialCount}&per_page=12`)
+        const datas = await result.json()
 
-    let fullArray = await datas.map((data) => {
+        let fullArray = await datas.map((data) => {
 
-        let img = {
-            desc: data.description,
-            demoUrl: data.urls.regular.replace('1080', 10),
-            srcUrl: data.urls.regular
-        }
-        return img
-    })
+            let img = {
+                desc: data.description,
+                demoUrl: data.urls.regular.replace('1080', 10),
+                srcUrl: data.urls.regular
+            }
+            return img
+        })
 
-    let [imgArrOne, imgArrTwo, imgArrThree] = splitArrayIntoChunksOfLen(fullArray, 4)
+        let [imgArrOne, imgArrTwo, imgArrThree] = splitArrayIntoChunksOfLen(fullArray, 4)
 
 
-    addElementToColumn(colOne, imgArrOne, false)
-    addElementToColumn(colTwo, imgArrTwo, false)
-    addElementToColumn(colThree, imgArrThree, true)
+        addElementToColumn(colOne, imgArrOne, false)
+        addElementToColumn(colTwo, imgArrTwo, false)
+        addElementToColumn(colThree, imgArrThree, true)
+
+    } catch (err) {
+
+    }
 
     loaderDiv.classList.toggle('active')
 

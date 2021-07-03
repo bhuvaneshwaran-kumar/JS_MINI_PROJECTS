@@ -10,12 +10,13 @@ let initialCount = 1
 
 //aws rdx aws lamda
 
+// this is to fetch data from unsplash when the last img div intersect to the view port
 const interSectionObserverToFetchData = target => {
     const io = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 initialCount++
-                getPictures()
+                getPictures() // fetch data
                 observer.disconnect();
             }
         });
@@ -23,11 +24,11 @@ const interSectionObserverToFetchData = target => {
     io.observe(target)
 }
 
+// this is to swith data-src attribute to src.
 const interSectionObserverToLasyLoadImg = target => {
     const io = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log(entry.target)
                 entry.target.setAttribute('src', entry.target.getAttribute('data-src'))
                 observer.disconnect();
             }
@@ -36,44 +37,33 @@ const interSectionObserverToLasyLoadImg = target => {
     io.observe(target)
 }
 
-
+//setAttribute to the element.
+const setAttributes = (imgElm, img) => {
+    imgElm.src = img.demoUrl
+    imgElm.setAttribute('desc', img.desc)
+    imgElm.setAttribute('data-src', img.srcUrl)
+}
 
 //add image to dom elements
 const addElementToColumn = (element, arr, lastArr) => {
+    const imgElm = document.createElement('img')
+    interSectionObserverToLasyLoadImg(imgElm)
+
     if (lastArr) {
         arr.forEach((img, index) => {
-            const imgElm = document.createElement('img')
-
             if (index === arr.length - 1) {
-                const imgElm = document.createElement('img')
-                imgElm.src = img.demoUrl
-                imgElm.setAttribute('desc', img.desc)
-                imgElm.setAttribute('data-src', img.srcUrl)
-                element.appendChild(imgElm)
                 interSectionObserverToFetchData(imgElm)
-                interSectionObserverToLasyLoadImg(imgElm)
-                return
             }
-
-            imgElm.src = img.demoUrl
-            imgElm.setAttribute('data-src', img.srcUrl)
-            imgElm.setAttribute('desc', img.desc)
-
-            element.appendChild(imgElm)
-            interSectionObserverToLasyLoadImg(imgElm)
+            setAttributes(imgElm, img)
         })
-        return
+    } else {
+        arr.forEach((img) => {
+            setAttributes(imgElm, img)
+        })
     }
 
-    arr.forEach((img) => {
-        const imgElm = document.createElement('img')
-        imgElm.src = img.demoUrl
-        imgElm.setAttribute('data-src', img.srcUrl)
-        imgElm.setAttribute('desc', img.desc)
-        element.appendChild(imgElm)
-        interSectionObserverToLasyLoadImg(imgElm)
+    element.appendChild(imgElm)  //add to the DOM
 
-    })
 }
 
 
@@ -89,7 +79,7 @@ function splitArrayIntoChunksOfLen(arr, len) {
 //fetch images from unsplash api
 const getPictures = async () => {
     loaderDiv.classList.toggle('active')
-    const result = await fetch(API_URL + `&page=${initialCount}&per_page=12&w=100&h=100`)
+    const result = await fetch(API_URL + `&page=${initialCount}&per_page=12`)
     const datas = await result.json()
 
     let fullArray = await datas.map((data) => {
@@ -102,7 +92,6 @@ const getPictures = async () => {
         return img
     })
 
-
     let [imgArrOne, imgArrTwo, imgArrThree] = splitArrayIntoChunksOfLen(fullArray, 4)
 
 
@@ -110,7 +99,6 @@ const getPictures = async () => {
     addElementToColumn(colTwo, imgArrTwo, false)
     addElementToColumn(colThree, imgArrThree, true)
 
-    console.log(imgArrOne, imgArrTwo, imgArrThree)
     loaderDiv.classList.toggle('active')
 
 

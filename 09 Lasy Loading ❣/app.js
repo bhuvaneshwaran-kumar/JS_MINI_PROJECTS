@@ -29,7 +29,7 @@ const interSectionObserverToLasyLoadImg = target => {
     const io = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.setAttribute('src', entry.target.getAttribute('data-src'))
+                setTimeout(() => { entry.target.setAttribute('src', entry.target.getAttribute('data-src')) }, 400)
                 observer.disconnect();
             }
         });

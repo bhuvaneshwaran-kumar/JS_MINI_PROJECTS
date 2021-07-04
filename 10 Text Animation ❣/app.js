@@ -43,4 +43,4 @@ typeWriter.prototype.type = function () { // prototype inheritance ❤*❤
 
 }
 
-new typeWriter(textContentElm, ["Hi Dev's", "This is Bhuvan", "Exploring The js"], 2000)
+new typeWriter(textContentElm, ["Hi Dev's,", "This is Bhuvan.", "Exploring The JS..!"], 2000)

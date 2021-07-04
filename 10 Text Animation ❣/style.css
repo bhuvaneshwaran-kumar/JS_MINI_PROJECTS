@@ -15,15 +15,6 @@ body {
   color: #396b39;
 }
 
-span {
-  opacity: 1;
-  transition: all 100ms;
-}
-
-span.show {
-  opacity: 1;
-}
-
 .txt {
   border-right: 2px solid #396b39;
 }

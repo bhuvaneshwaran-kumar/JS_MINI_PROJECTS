@@ -10,28 +10,28 @@ const typeWriter = function (textElement, words, wait = 3000) {
 }
 
 //type method
-typeWriter.prototype.type = function () {
+typeWriter.prototype.type = function () { // prototype inheritance ❤*❤
     // Current index of word
     const current = this.wordIndex % this.words.length;
     // get full text of the current word.
     const fullText = this.words[current];
-    console.log(typeof fullText);
+
     if (this.isDeleting) {
-        this.txt = fullText.substring(0, this.txt.length - 1)
+        this.txt = fullText.substring(0, this.txt.length - 1) // remove one letter from right.
     } else {
-        this.txt = fullText.substring(0, this.txt.length + 1)
+        this.txt = fullText.substring(0, this.txt.length + 1) // add the next letter to the right.
     }
 
-    this.textElement.innerHTML = `<span class="txt">${this.txt}</span>`
+    this.textElement.innerHTML = `<span class="txt">${this.txt}</span>` // append the span to textElement.
 
-    let typeSpeed = 100;
+    let typeSpeed = 100; // deside the speed.
 
     if (this.isDeleting) {
-        typeSpeed /= 2;
+        typeSpeed /= 2; // increase the delete speed.
     }
 
     if (!this.isDeleting && this.txt === fullText) {
-        typeSpeed = this.wait
+        typeSpeed = this.wait // wait for the given time.
         this.isDeleting = true;
     } else if (this.isDeleting && this.txt === '') {
         this.isDeleting = false;
@@ -44,31 +44,3 @@ typeWriter.prototype.type = function () {
 }
 
 new typeWriter(textContentElm, ["Hi Dev's", "This is Bhuvan", "Exploring The js"], 2000)
-
-
-
-
-
-
-
-// const textArr = textContentElm.textContent.split('')
-
-// textContentElm.textContent = ""
-
-// textArr.forEach((letter, index) => {
-//     let span = document.createElement('span')
-//     span.setAttribute('id', index)
-//     span.textContent = letter
-//     textContentElm.appendChild(span)
-// })
-
-// let index = 0
-// let spans = [...textContentElm.querySelectorAll('span')]
-// console.log(spans)
-// let timer = setInterval(() => {
-//     spans[index].classList.add('show')
-//     index += 1
-//     if (index === spans.length) {
-//         clearInterval(timer)
-//     }
-// }, 50)

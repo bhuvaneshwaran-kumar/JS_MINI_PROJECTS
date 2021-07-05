@@ -24,7 +24,8 @@ Click [**HERE**](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/) To pr
 | 10  | Infinite Scrolling       | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/08%20Infinite%20Scrolling%20%E2%9D%A3/index.html)         |
 | 11  | Lasy Loading             | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/09%20Lasy%20Loading%20%E2%9D%A3/index.html)               |
 | 12  | Text animation           | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/10%20Text%20Animation%20%E2%9D%A3/index.html)             |
+| 13  | Image Carousel           | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/11%20Image_Carousel%20%E2%9D%A3/index.html)               |
 
-> project 13 yet to start.
+> project 14 yet to start.
 
 ---

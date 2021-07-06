@@ -1,0 +1,78 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.bookmark {
+  width: 100%;
+  max-width: 600px;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.form,
+.bookmark-collection {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.form-name,
+.form-url {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.form label {
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+.btn.btn-primary {
+  align-self: flex-start;
+  padding: 0.5rem;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background-color: blue;
+  color: white;
+  border-radius: 0.3rem;
+  transition: all 0.5 ease;
+  cursor: pointer;
+}
+.btn.btn-primary:active {
+  transform: translateY(2px);
+}
+.message {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: green;
+  visibility: hidden;
+}
+.message.active {
+  visibility: visible;
+}
+.message.error {
+  color: red;
+}
+.bookmark-collection {
+  box-shadow: 2px 5px 30px 10px rgba(0, 0, 0, 0.1);
+}
+.bookmart-item {
+  padding: 1rem;
+  font-weight: 500;
+  display: flex;
+}

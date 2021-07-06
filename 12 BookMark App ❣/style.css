@@ -57,10 +57,11 @@ body {
   transform: translateY(2px);
 }
 .message {
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   font-weight: 500;
   color: green;
   visibility: hidden;
+  transition: visibility 0.5ms ease-in-out;
 }
 .message.active {
   visibility: visible;

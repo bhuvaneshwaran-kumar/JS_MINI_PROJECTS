@@ -28,30 +28,35 @@ function validateURL(str) {
 
 
 // CB-function when user click bookmark_Iteam div.
+let trottlingTimer = true;
 function performOnBookmarkItem(e) {
-    const targetElm = e.target
-    console.log(targetElm)
-    if (targetElm.classList.contains('remove-bookmark-item')) {
-        const removeParentElm = targetElm.parentNode
-        removeParentElm.classList.add('remove')
-        console.log(removeParentElm)
-        const removeIndex = [...bookmarkCollection.children].indexOf(removeParentElm)
-        setTimeout(() => {
-            removeBookmarkInLocalStorage(removeIndex)
-            bookmarkCollection.removeChild(removeParentElm)
-        }, 500)
-    } else if (targetElm.classList.contains('bookmark-name')) {
-        window.open(targetElm.getAttribute('data-url'));
+    if (trottlingTimer) {
+        trottlingTimer = false;
+        const targetElm = e.target
+        console.log(targetElm)
+        if (targetElm.classList.contains('remove-bookmark-item')) {
+            const removeParentElm = targetElm.parentNode
+            removeParentElm.classList.add('remove')
+            console.log(removeParentElm)
+            const removeIndex = [...bookmarkCollection.children].indexOf(removeParentElm)
+            setTimeout(() => {
+                removeBookmarkInLocalStorage(removeIndex)
+                bookmarkCollection.removeChild(removeParentElm)
+                trottlingTimer = true
+            }, 500)
+        } else if (targetElm.classList.contains('bookmark-name')) {
+            window.open(targetElm.getAttribute('data-url'));
+        }
     }
 }
 
-let timer
+let timer // display the error and success message form 2s
 function showMessage(hasError, element, message) {
     clearTimeout(timer)
+    element.classList.add('active')
+    element.textContent = message
     if (hasError) {
-        element.classList.add('active')
         element.classList.add('error')
-        element.textContent = message
     }
 
     timer = setTimeout(() => {
@@ -60,6 +65,7 @@ function showMessage(hasError, element, message) {
     }, 2000)
 }
 
+// when user submits the form.
 function formSubmit(e) {
     e.preventDefault()
     const formName = bookmarkForm.formName.value
@@ -78,11 +84,15 @@ function formSubmit(e) {
     }
 
     addBookmarkToLocalStorage(formName, formUrl)
-
     appendUrlElm(formName, formUrl)
+
+    bookmarkForm.formName.value = ''
+    bookmarkForm.formUrl.value = ''
+    showMessage(false, messageElm, "Successfully added the bookmark.")
 
 }
 
+// creates a respective element with the class list.
 function createElemet(element, classItems = []) {
     const Element = document.createElement(element)
 
@@ -93,6 +103,7 @@ function createElemet(element, classItems = []) {
     return Element
 }
 
+//append the URL element to the bookmarkCollection element.
 function appendUrlElm(formName, formUrl) {
     const bookmarkItemElm = createElemet('div', ['bookmark-item'])
     const bookmarkNameElm = createElemet('p', ['bookmark-name'])
@@ -111,11 +122,13 @@ function appendUrlElm(formName, formUrl) {
 
 }
 
+//add||prepend the bookmark to the localStorage
 function addBookmarkToLocalStorage(formName, formUrl) {
     bookmarkLocal = [...bookmarkLocal, { name: formName, url: formUrl }]
     localStorage.setItem('JSMINI_bookmarks', JSON.stringify(bookmarkLocal))
 }
 
+//remover the bookmark in localStorage using index
 function removeBookmarkInLocalStorage(index) {
 
     bookmarkLocal = bookmarkLocal.filter((data, dataIndex) => {
@@ -128,15 +141,13 @@ function removeBookmarkInLocalStorage(index) {
 
 
 
-
-
 // AddEventListener.
 bookmarkCollection.addEventListener("click", performOnBookmarkItem)
 bookmarkForm.addEventListener('submit', formSubmit)
 
 
 
-
+// Initial call to render url elements in bookmark collection.
 bookmarkLocal = retriveBookmarkLocal()
 if (bookmarkLocal.length === 0)
     appendUrlElm('bhuvan', 'https://bhuvan.com')

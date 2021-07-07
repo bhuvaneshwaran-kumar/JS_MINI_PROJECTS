@@ -150,7 +150,7 @@ bookmarkForm.addEventListener('submit', formSubmit)
 // Initial call to render url elements in bookmark collection.
 bookmarkLocal = retriveBookmarkLocal()
 if (bookmarkLocal.length === 0)
-    appendUrlElm('bhuvan', 'https://bhuvan.com')
+    appendUrlElm('JS_MINI_PROJECTS.', 'https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/')
 else
     bookmarkLocal.forEach(data => appendUrlElm(data.name, data.url))
 

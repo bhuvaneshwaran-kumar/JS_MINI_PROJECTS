@@ -27,6 +27,6 @@ Click [**HERE**](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/) To pr
 | 13  | Image Carousel           | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/11%20Image_Carousel%20%E2%9D%A3/index.html)               |
 | 14  | BookMark Lists           | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/12%20BookMark%20App%20%E2%9D%A3/index.html)               |
 
-> project 14 yet to start.
+> project 15 yet to start.
 
 ---

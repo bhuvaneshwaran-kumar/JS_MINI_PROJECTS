@@ -89,7 +89,7 @@ async function merge(arr, left, middle, right) {
 }
 
 async function mergeSort(arr, left, right) {
-    console.log(left, right)
+    // console.log(left, right)
     await sleep(100)
     if (left < right) {
 

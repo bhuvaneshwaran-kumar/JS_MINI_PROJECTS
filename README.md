@@ -29,6 +29,6 @@ Click [**HERE**](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/) To pr
 | 15  | BookMark Lists           | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/12%20BookMark%20App%20%E2%9D%A3/index.html)               |
 | 16  | Filterable Names         | [link](https://bhuvaneshwaran-kumar.github.io/JS_MINI_PROJECTS/13%20Filterable%20List%20%E2%9D%A3/index.html)            |
 
-> project 15 yet to start.
+> project 17 yet to start.
 
 ---

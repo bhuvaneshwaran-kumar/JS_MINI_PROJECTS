@@ -83,14 +83,13 @@ section {
   /* border: 1px solid black; */
   width: 45%;
 }
+.match .hands.shake img {
+  animation: shake 100ms ease 100ms infinite alternate none;
+}
 /* //rgb(39, 41, 68); */
 .match.fade-out {
   opacity: 0;
   pointer-events: none;
-}
-
-.match .hands img:nth-child(1) {
-  transform: rotateY(180deg);
 }
 
 .options {
@@ -108,4 +107,13 @@ section {
   color: white;
   border-radius: 3px;
   cursor: pointer;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
 }
